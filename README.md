@@ -9,9 +9,14 @@ are the descriptions of the user's bowel movements.
 
 Days are displayed three at a time. The user selects the day they would like to view and the day before and the day after that chosen day are displayed on the user's home screen / navigator.
 
+The overall day-events are displayed in a paragraph at the top as long as the date as a title.
+
+"In's" and "out's" are displayed below, in's on the left out's on the right.
+Preferably the entries are timestamped, but at the least in's and out's are displayed in chronological order on their respective side of the screen.
+
 The point of the journal is to create a log of events/food/BMs in order to draw conclusions about that person's digestive track and the optimal conditions under which his or her bowels operate.
 
-A full description of the assignment has been copy-pasted below from: https://github.com/Make-School-Courses/BEW-1.2-Authentication-and-Associations/blob/master/Projects/02-Custom-API-Project.md
+A full description of the assignment has been copy-pasted below from https://github.com/Make-School-Courses/BEW-1.2-Authentication-and-Associations/blob/master/Projects/02-Custom-API-Project.md
 
 """
 Custom Authenticated API Project
