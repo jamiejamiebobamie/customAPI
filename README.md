@@ -1,9 +1,20 @@
 This is a repository for the final project of Backend Web 1.2 for Make School, San Francisco.
 
-from https://github.com/Make-School-Courses/BEW-1.2-Authentication-and-Associations/blob/master/Projects/02-Custom-API-Project.md
+For my "custom api," I'm going to allow users to create accounts and log their food and bowel movements in a journal.
 
+Users have days and days have both "in's" and "out's" (like comments to posts in the reddit tutorial).
 
-"Custom Authenticated API Project
+Days are meant to keep track of events and stressors throughout the day, while "in's" are like comments on the day as to what the user had to eat and "out's"
+are the descriptions of the user's bowel movements.
+
+Days are displayed three at a time. The user selects the day they would like to view and the day before and the day after that chosen day are displayed on the user's home screen / navigator.
+
+The point of the journal is to create a log of events/food/BMs in order to draw conclusions about that person's digestive track and the optimal conditions under which his or her bowels operate.
+
+A full description of the assignment has been copy-pasted below from: https://github.com/Make-School-Courses/BEW-1.2-Authentication-and-Associations/blob/master/Projects/02-Custom-API-Project.md
+
+"""
+Custom Authenticated API Project
 
 It's time to get creative and write the authenticated API of your dreams!
 
@@ -118,3 +129,5 @@ Section	Possible	Earned	Final (%)
 Functional Requirements	80		
 Non-Functional Requirements	80		
 TOTAL	160
+
+""""
