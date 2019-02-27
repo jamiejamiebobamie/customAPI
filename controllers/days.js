@@ -1,4 +1,4 @@
-const Post = require('../models/post');
+const Day = require('../models/day');
 const User = require('../models/user');
 
 module.exports = (app) => {
@@ -8,41 +8,41 @@ module.exports = (app) => {
             var currentUser = req.user;
             // res.render('home', {});
             console.log(req.cookies);
-            Post.find().populate('author')
-            .then(posts => {
-                console.log(posts)
-                res.render('posts-index', { posts, currentUser });
+            Day.find().populate('author')
+            .then(days => {
+                console.log(days)
+                res.render('days-index', { days, currentUser });
                 // res.render('home', {});
             }).catch(err => {
                 console.log(err.message);
             })
         })
 
-    // GET NEW POST FORM
-    app.get('/posts/new', (req, res) => {
-        res.render('posts-new');
+    // GET NEW DAY FORM
+    app.get('/days/new', (req, res) => {
+        res.render('days-new');
     })
 
     // CREATE
-        app.post("/posts/new", (req, res) => {
+        app.post("/days/new", (req, res) => {
             if (req.user) {
-                var post = new Post(req.body);
-                post.author = req.user._id;
-                post.upVotes = [];
-                post.downVotes = [];
-                post.voteScore = 0;
+                var day = new Day(req.body);
+                day.author = req.user._id;
+                day.upVotes = [];
+                day.downVotes = [];
+                day.voteScore = 0;
 
 
-                post
+                day
                     .save()
-                    .then(post => {
+                    .then(day => {
                         return User.findById(req.user._id);
                     })
                     .then(user => {
-                        user.posts.unshift(post);
+                        user.days.unshift(day);
                         user.save();
-                        // REDIRECT TO THE NEW POST
-                        res.redirect(`/posts/${post._id}`);
+                        // REDIRECT TO THE NEW DAY
+                        res.redirect(`/days/${day._id}`);
                     })
                     .catch(err => {
                         console.log(err.message);
@@ -51,12 +51,14 @@ module.exports = (app) => {
                 return res.status(401); // UNAUTHORIZED
             }
         });
+
         // SHOW
-        app.get("/posts/:id", function (req, res) {
+        app.get("/days/:id", function (req, res) {
             var currentUser = req.user;
-            Post.findById(req.params.id).populate('comments').lean()
-                .then(post => {
-                    res.render("posts-show", { post, currentUser });
+            Day.findById(req.params.id).populate('ins'&&'outs').lean()
+            // Day.findById(req.params.id).populate('outs').lean()
+                .then(day => {
+                    res.render("days-show", { day, currentUser });
                 })
                 .catch(err => {
                     console.log(err.message);
@@ -66,30 +68,30 @@ module.exports = (app) => {
         // SUBREDDIT
         app.get("/n/:subreddit", function (req, res) {
             var currentUser = req.user;
-            Post.find({ subreddit: req.params.subreddit }).lean()
-                .then(posts => {
-                    res.render("posts-index", { posts, currentUser });
+            Day.find({ subreddit: req.params.subreddit }).lean()
+                .then(days => {
+                    res.render("days-index", { days, currentUser });
                 })
                 .catch(err => {
                     console.log(err);
                 });
         });
 
-        app.put("/posts/:id/vote-up", function(req, res) {
-  Post.findById(req.params.id).exec(function(err, post) {
-    post.upVotes.push(req.user._id);
-    post.voteScore = post.voteScore + 1;
-    post.save();
+        app.put("/days/:id/vote-up", function(req, res) {
+  Day.findById(req.params.id).exec(function(err, day) {
+    day.upVotes.push(req.user._id);
+    day.voteScore = day.voteScore + 1;
+    day.save();
     // res.redirect('/')
     res.status(200);
   });
 });
 
-app.put("/posts/:id/vote-down", function(req, res) {
-  Post.findById(req.params.id).exec(function(err, post) {
-    post.downVotes.push(req.user._id);
-    post.voteScore = post.voteScore - 1;
-    post.save();
+app.put("/days/:id/vote-down", function(req, res) {
+  Day.findById(req.params.id).exec(function(err, day) {
+    day.downVotes.push(req.user._id);
+    day.voteScore = day.voteScore - 1;
+    day.save();
 
     res.status(200);
   });
@@ -101,4 +103,4 @@ app.put("/posts/:id/vote-down", function(req, res) {
 // STRETCH CHALLENGE!!
 // Can you make an author's username a link that displays that users's profile at /users/:username?
 // Can you do the same for comments?
-// Can you make a /profile route that loads the current user and displays their posts and comments?
+// Can you make a /profile route that loads the current user and displays their days and comments?

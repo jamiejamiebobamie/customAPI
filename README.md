@@ -1,10 +1,12 @@
+App name: "Diaria".
+
 This is a repository for the final project of Backend Web 1.2 for Make School, San Francisco.
 
 For my "custom api," I'm going to allow users to create accounts and log their food and bowel movements in a journal.
 
-Users have days and days have both "in's" and "out's" (like comments to posts in the reddit tutorial).
+Users have days and days have both "in's" and "out's" (like posts to comments in the reddit tutorial).
 
-Days are meant to keep track of events and stressors throughout the day, while "in's" are like comments on the day as to what the user had to eat and "out's"
+Days are meant to keep track of events and stressors throughout the day, while "in's" keep track of what the user had to eat and "out's"
 are the descriptions of the user's bowel movements.
 
 Days are displayed three at a time. The user selects the day they would like to view and the day before and the day after that chosen day are displayed on the user's home screen / navigator.

@@ -1,28 +1,28 @@
-const Post = require('../models/post');
-const Comment = require('../models/comment');
+const Day = require('../models/day');
+const In = require('../models/ins');
 
 
 module.exports = function(app) {
 
-        // CREATE Comment
-        app.post("/posts/:postId/comments", function (req, res) {
-            const comment = new Comment(req.body);
-            comment.author = req.user._id;
-            comment
+        // CREATE In
+        app.post("/days/:dayId/ins", function (req, res) {
+            const in = new In(req.body);
+            in.author = req.user._id;
+            in
                 .save()
-                .then(comment => {
+                .then(in => {
                     return Promise.all([
-                        Post.findById(req.params.postId)
+                        Post.findById(req.params.dayId)
                     ]);
                 })
-                .then(([post, user]) => {
-                    post.comments.unshift(comment);
+                .then(([day, user]) => {
+                    day.ins.unshift(in);
                     return Promise.all([
-                        post.save()
+                        day.save()
                     ]);
                 })
-                .then(post => {
-                    res.redirect(`/posts/${req.params.postId}`);
+                .then(day => {
+                    res.redirect(`/days/${req.params.dayId}`);
                 })
                 .catch(err => {
                     console.log(err);
